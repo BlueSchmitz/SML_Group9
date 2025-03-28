@@ -54,11 +54,11 @@ model_data['charge_change'] = data['charge_at_7'] - data['charge_at_5']
 model_data['set'] = data['set'].map({'soluble': 0, 'aggregator': 1})
 print(model_data.head())
 
-# %%
+# %% Split data and define model, parameters and scoring
 np.random.seed(42)
 random.seed(42)
 
-# %% Define model to use (Random Forest)
+# Define model to use (Random Forest)
 models = {
     'RandomForest': {
         'model': RandomForestClassifier(random_state=42),
@@ -73,7 +73,7 @@ models = {
 # %% Separate train and test data while preserving class distribution
 train, test = train_test_split(
     model_data,
-    test_size=1000,  # 500 instances in the test set (can change this)
+    test_size=1000,  # 1000 instances in the test set (can change this)
     stratify=model_data['set'],  # Preserve class distribution
     random_state=42  # For reproducibility
 )
@@ -256,9 +256,9 @@ print(f"Shape of SHAP values (class 0): {shap_values[0].shape}")
 print(f"Shape of SHAP values (class 1): {shap_values[1].shape}")
 print(f"Shape of X_resampled: {X_resampled.shape}")
 
-# Visualize the feature importance using SHAP (for the positive class, i.e., "aggregator")
+# Visualize the feature importance using SHAP (for the positive class)
 # Ensure that shap_values[1] matches the shape of X_resampled
-shap.summary_plot(shap_values[:,:,1], X_resampled)  # The `[1]` is for the positive class (aggregator) if you're dealing with binary classification
+shap.summary_plot(shap_values[:,:,1], X_resampled)  # The [1] is for the positive class (aggregator)
 
 # Feature importance for the Random Forest model using SHAP
 # If you want to just extract feature importance values from SHAP
@@ -356,7 +356,7 @@ y_test1 = test1['set']
 
 train2, test2 = train_test_split(
     model2_data,
-    test_size=1000,  # 500 instances in the test set (can change this)
+    test_size=1000,  # 1000 instances in the test set (can change this)
     stratify=model2_data['set'],  # Preserve class distribution
     random_state=42  # For reproducibility
 )
