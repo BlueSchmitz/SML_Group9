@@ -77,7 +77,7 @@ import seaborn as sns
 # Separate train and test data
 train, test = train_test_split(
     data,
-    test_size=1000,  # 500 instances in the test set (can change this)
+    test_size=1000,  # 1000 instances in the test set (can change this)
     stratify=data['set'],  # Preserve class distribution
     random_state=42  # For reproducibility
 )
@@ -101,7 +101,7 @@ print(classification_report(y_test, y_pred))
 # Get the classification report as a dictionary
 report = classification_report(y_test, y_pred, output_dict=True)
 
-# Extract the F1 score for the "Aggregator" class (assuming it's labeled 'Aggregator')
+# Extract the F1 score for class 1 (aggregator)
 aggregator_f1 = report['aggregator']['f1-score']
 aggregator_precision = report['aggregator']['precision']
 aggregator_recall = report['aggregator']['recall']
